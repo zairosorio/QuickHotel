@@ -7,11 +7,28 @@ package quick.hotel;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import static quick.hotel.Registro.campo_calendario;
+import static quick.hotel.Registro.campo_cel;
+import static quick.hotel.Registro.campo_direccion;
+import static quick.hotel.Registro.campo_identificacion;
+import static quick.hotel.Registro.campo_pri_apellido;
+import static quick.hotel.Registro.campo_pri_nombre;
+import static quick.hotel.Registro.campo_seg_apellido;
+import static quick.hotel.Registro.campo_seg_nombre;
+import static quick.hotel.Registro.campo_tel;
+import static quick.hotel.Registro.campocorreo;
+import static quick.hotel.Registro.combo_IDENTIDAD;
+import static quick.hotel.Registro.combociudad;
+import static quick.hotel.Registro.combodpto;
+import static quick.hotel.Registro.combopais;
 
 /**
  *
@@ -46,8 +63,8 @@ public class Reservas extends javax.swing.JFrame {
 
             while (rs.next()) {
 
-                Campo_Reserva.setText(rs.getString(1));
-                Campo_Reserva.setEditable(false);
+                N_Reserva.setText(rs.getString(1));
+                N_Reserva.setEditable(false);
 
             }
         } catch (ClassNotFoundException ex) {
@@ -57,6 +74,7 @@ public class Reservas extends javax.swing.JFrame {
         }
 
     }
+     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -74,7 +92,7 @@ public class Reservas extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        Campo_Reserva = new javax.swing.JTextField();
+        N_Reserva = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         S_c_personas = new javax.swing.JSpinner();
         S_noches = new javax.swing.JSpinner();
@@ -84,8 +102,6 @@ public class Reservas extends javax.swing.JFrame {
         J_Inicio = new com.toedter.calendar.JDateChooser();
         J_fin = new com.toedter.calendar.JDateChooser();
         jButton5 = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -109,6 +125,11 @@ public class Reservas extends javax.swing.JFrame {
         jLabel10.setText("CANTIDAD PERSONAS:");
 
         jButton1.setText("RESERVAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("ELIMINAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -132,10 +153,6 @@ public class Reservas extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-
-        jLabel11.setText("jLabel11");
-
-        jLabel12.setText("jLabel12");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -163,7 +180,7 @@ public class Reservas extends javax.swing.JFrame {
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Campo_Reserva, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(N_Reserva, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(Campo_Identificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(49, 49, 49)
@@ -190,23 +207,16 @@ public class Reservas extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                 .addGap(62, 62, 62)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel11)
-                        .addGap(253, 253, 253))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,7 +232,7 @@ public class Reservas extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel5)
-                                .addComponent(Campo_Reserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(N_Reserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel3))
                             .addComponent(rSLabelFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
@@ -245,11 +255,7 @@ public class Reservas extends javax.swing.JFrame {
                             .addComponent(S_c_habitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9)
                             .addComponent(S_noches, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(9, 9, 9)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(34, 34, 34)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -283,6 +289,63 @@ public class Reservas extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Conexion cc = new Conexion();
+        Connection cn = cc.getConnection();
+        String NUM_RESERVA = null, ID_HUESPED, FEC_INICIO_RESERVA, FEC_FIN_RESERVA, CANT_HABITACION, CANT_NOCHE, CANT_PERSONAS;
+        String sql = "";
+
+        Integer CAN_HABITACION = (Integer) S_c_habitacion.getValue();
+        Integer CAN_NOCHES = (Integer) S_c_habitacion.getValue();
+        Integer CAN_PERSONA = (Integer) S_c_personas.getValue();
+
+        int diaI = J_Inicio.getCalendar().get(Calendar.DAY_OF_MONTH);
+        int mesI = J_Inicio.getCalendar().get(Calendar.ALL_STYLES);
+        int añoI = J_Inicio.getCalendar().get(Calendar.YEAR);
+        int horaI = J_Inicio.getCalendar().get(Calendar.HOUR_OF_DAY);
+        int min = J_Inicio.getCalendar().get(Calendar.MINUTE);
+
+        int diaF = J_fin.getCalendar().get(Calendar.DAY_OF_MONTH);
+        int mesF = J_fin.getCalendar().get(Calendar.ALL_STYLES);
+        int añoF = J_fin.getCalendar().get(Calendar.YEAR);
+
+        String FECHA_I_RESERVA = +añoI + "-" + mesI + "-" + diaI + " " + horaI + ":" + min;
+        String FECHA_F_RESERVA = +añoF + "-" + mesF + "-" + diaF;
+
+        NUM_RESERVA = N_Reserva.getText();
+        ID_HUESPED = Campo_Identificacion.getText();
+
+        sql = "INSERT INTO  reserva (NUM_RESERVA,ID_HUESPED,FEC_INICIO_RESERVA,FEC_FIN_RESERVA,CANT_HABITACION, CANT_NOCHES,CANT_PERSONAS) VALUES (?,?,?,?,?,?,?)";
+
+        try {
+
+            PreparedStatement pst = cn.prepareStatement(sql);
+
+            pst.setString(1, NUM_RESERVA);
+            pst.setString(2, ID_HUESPED);
+            pst.setString(3, FECHA_I_RESERVA);
+            pst.setString(4, FECHA_F_RESERVA);
+            pst.setInt(5, CAN_HABITACION);
+            pst.setInt(6, CAN_NOCHES);
+            pst.setInt(7, CAN_PERSONA);
+
+            int n = pst.executeUpdate();
+
+            if (n > 0) {
+                JOptionPane.showMessageDialog(null, " !RESERVACION CREADA! ");
+
+                campo_calendario.setDate(null);
+               
+                
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "no se pudo guardar el registro");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,9 +384,9 @@ public class Reservas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Campo_Identificacion;
-    private javax.swing.JTextField Campo_Reserva;
     private com.toedter.calendar.JDateChooser J_Inicio;
     private com.toedter.calendar.JDateChooser J_fin;
+    private javax.swing.JTextField N_Reserva;
     private javax.swing.JSpinner S_c_habitacion;
     private javax.swing.JSpinner S_c_personas;
     private javax.swing.JSpinner S_noches;
@@ -334,8 +397,6 @@ public class Reservas extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
