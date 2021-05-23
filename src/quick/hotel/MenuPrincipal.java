@@ -12,6 +12,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import static quick.hotel.Registro.combociudad;
 import static quick.hotel.Registro.combodpto;
 import static quick.hotel.Registro.combopais;
@@ -28,6 +33,8 @@ public final class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
+        reporte();
+     
       
           
     }
@@ -307,25 +314,30 @@ public final class MenuPrincipal extends javax.swing.JFrame {
     private void JREPORTESMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JREPORTESMouseClicked
         // TODO add your handling code here:
         
-         Conexion con = new Conexion();
-        Connection conexion = con.getConexion();
+        reporte();
         
+        
+        
+    }//GEN-LAST:event_JREPORTESMouseClicked
+
+    /**
+     * @param args the command line arguments
+     */
+    void reporte (){
+        Conexion cc = new Conexion();
+        Connection cn = cc.getConnection();
         try {
             
-       String  Reporte = System.getProperty("user.dir") + "/src/Reporte/ReporteReserva.jasper";
+       String  Reporte = System.getProperty("user.dir") + "/src/Reporte/ReporteReservas.jasper";
             JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile(Reporte);
-            JasperPrint print = JasperFillManager.fillReport(jasperReport, null, conexion);
+            JasperPrint print = JasperFillManager.fillReport(jasperReport, null, cn);
             JasperViewer view = new JasperViewer(print, false);
             view.setVisible(true);
 
         } catch (Exception e) {
             System.err.println("Error al generar el reporte -> " + e.getMessage());
         }
-    }//GEN-LAST:event_JREPORTESMouseClicked
-
-    /**
-     * @param args the command line arguments
-     */
+    }
     void cargar(){
         try {
             Connection con = null;
