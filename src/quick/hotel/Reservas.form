@@ -70,8 +70,8 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="N_Reserva" min="-2" pref="51" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="Campo_Identificacion" min="-2" pref="90" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                                  <Component id="Combo_Huesped" min="-2" pref="129" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="J_Inicio" min="-2" pref="133" max="-2" attributes="0"/>
@@ -138,11 +138,11 @@
                               </Group>
                               <Component id="rSLabelFecha1" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                          <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Campo_Identificacion" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Combo_Huesped" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="J_Inicio" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -276,8 +276,6 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="Campo_Identificacion">
-        </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="J_Inicio">
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="J_fin">
@@ -289,6 +287,12 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="Combo_Huesped">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

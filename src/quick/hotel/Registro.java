@@ -89,6 +89,7 @@ public class Registro extends javax.swing.JFrame {
         btnmodificar = new javax.swing.JButton();
         btneliminar = new javax.swing.JButton();
         campo_direccion = new javax.swing.JTextField();
+        Lfecha_naci = new javax.swing.JLabel();
 
         jScrollPane1.setViewportView(jEditorPane1);
 
@@ -209,7 +210,15 @@ public class Registro extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel10.setText("Fecha_Naci:(*)");
 
+        campo_calendario.setDateFormatString("dd/MMM/yyyy");
+        campo_calendario.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+
         combopais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+        combopais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combopaisActionPerformed(evt);
+            }
+        });
 
         combodpto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
         combodpto.addActionListener(new java.awt.event.ActionListener() {
@@ -323,7 +332,8 @@ public class Registro extends javax.swing.JFrame {
                                 .addGap(28, 28, 28)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(campo_tel, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(campo_calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(campo_calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Lfecha_naci, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -405,7 +415,8 @@ public class Registro extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel14)
                             .addComponent(jLabel15)
-                            .addComponent(jLabel16))))
+                            .addComponent(jLabel16)
+                            .addComponent(Lfecha_naci, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(combopais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -415,7 +426,7 @@ public class Registro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campo_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnlimpiar)
                     .addComponent(btncrear)
@@ -692,6 +703,10 @@ public class Registro extends javax.swing.JFrame {
     private void campo_direccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_direccionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campo_direccionActionPerformed
+
+    private void combopaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combopaisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combopaisActionPerformed
     void buscar() {
         String cc = campo_identificacion.getText();
         if (cc.isEmpty() == true) {
@@ -707,7 +722,7 @@ public class Registro extends javax.swing.JFrame {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/quick_hotel", "root", "");
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select * from  huesped where IDENTIFICACION='" + identificacion + "'  ");
-
+             String datefecha = "";
             if (rs.next()) {
                 combo_IDENTIDAD.addItem(rs.getString(2));
                 campo_pri_nombre.setText(rs.getString(3));
@@ -717,7 +732,10 @@ public class Registro extends javax.swing.JFrame {
                 campo_direccion.setText(rs.getString(7));
                 campo_tel.setText(rs.getString(8));
                 campo_cel.setText(rs.getString(9));
-
+                ///JOptionPane.showMessageDialog(null, ""+rs.getString(10));
+                //Lfecha_naci.setText(rs.getString(10));
+                campo_calendario.setDateFormatString(rs.getString(10));
+                Lfecha_naci.setText(rs.getString(10));
                 campocorreo.setText(rs.getString(11));
                 combopais.addItem(rs.getString(12));
                 combodpto.addItem(rs.getString(13));
@@ -757,7 +775,7 @@ public class Registro extends javax.swing.JFrame {
                 combopais.addItem(rs.getString(1));
                 combodpto.addItem(rs.getString(2));
                 combociudad.addItem(rs.getString(3));
-                ///combomuni.addItem(rs.getString(4));
+                
 
             }
         } catch (ClassNotFoundException ex) {
@@ -827,6 +845,7 @@ public class Registro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Lfecha_naci;
     public static javax.swing.JButton btnbuscar;
     public static javax.swing.JButton btncrear;
     public static javax.swing.JButton btneliminar;

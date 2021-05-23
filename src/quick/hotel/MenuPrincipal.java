@@ -211,6 +211,11 @@ public final class MenuPrincipal extends javax.swing.JFrame {
 
         JREPORTES.setText("REPOSTES");
         JREPORTES.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        JREPORTES.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JREPORTESMouseClicked(evt);
+            }
+        });
         jMenuBar3.add(JREPORTES);
 
         JFACTURA.setText("FACTURACION");
@@ -298,6 +303,25 @@ public final class MenuPrincipal extends javax.swing.JFrame {
         R.setLocationRelativeTo(this);
         R.setTitle(".....::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::SISTEMA DE RESERVAS::::::::::..............");
     }//GEN-LAST:event_JRESERVAMouseClicked
+
+    private void JREPORTESMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JREPORTESMouseClicked
+        // TODO add your handling code here:
+        
+         Conexion con = new Conexion();
+        Connection conexion = con.getConexion();
+        
+        try {
+            
+       String  Reporte = System.getProperty("user.dir") + "/src/Reporte/ReporteReserva.jasper";
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile(Reporte);
+            JasperPrint print = JasperFillManager.fillReport(jasperReport, null, conexion);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            System.err.println("Error al generar el reporte -> " + e.getMessage());
+        }
+    }//GEN-LAST:event_JREPORTESMouseClicked
 
     /**
      * @param args the command line arguments
