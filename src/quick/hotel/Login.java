@@ -173,8 +173,8 @@ public void validarusuario() throws SQLException, ClassNotFoundException {
             pass = (rs.getString(2));
             rol = (rs.getString(3));
 
-            ///String Encrippass  =   DigestUtils.md5Hex(pass);
-            System.out.println("md5:" + Encripclave);
+            
+             ////System.out.println("md5:" + Encripclave);
 
             if (usuario.equals(user) & Encripclave.equals(pass) & rol.equals("admin")) {
                 MenuPrincipal M = new MenuPrincipal();
