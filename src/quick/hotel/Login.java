@@ -175,11 +175,13 @@ public void validarusuario() throws SQLException, ClassNotFoundException {
 
             
              ////System.out.println("md5:" + Encripclave);
+             String Testto = "";
+            Testto = (usuario.toUpperCase());
 
             if (usuario.equals(user) & Encripclave.equals(pass) & rol.equals("admin")) {
                 MenuPrincipal M = new MenuPrincipal();
                 M.setVisible(true);
-                JOptionPane.showMessageDialog(null, "::::BIENVENIDO A QUICK HOTEL:::::" + usuario);
+                JOptionPane.showMessageDialog(null, "::::::::BIENVENIDO A:::::::::: \n ::QUICK HOTEL:::::" + Testto);
                 M.rolAdmin();
                 this.setVisible(false);
                 user();
@@ -189,7 +191,7 @@ public void validarusuario() throws SQLException, ClassNotFoundException {
                 MenuPrincipal M = new MenuPrincipal();
                 M.setVisible(true);
                 M.rolEstandar();
-                JOptionPane.showMessageDialog(null, ":::::BIENVENIDO A QUICK HOTEL::::" + usuario);
+                JOptionPane.showMessageDialog(null, "::::::::BIENVENIDO A:::::::::: \n ::QUICK HOTEL:::::" + Testto);
                 this.setVisible(false);
                 user();
             }

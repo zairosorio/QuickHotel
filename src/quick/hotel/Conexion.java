@@ -23,7 +23,7 @@ public class Conexion {
             Class.forName("com.mysql.jdbc.Driver");
             con = (Connection) DriverManager.getConnection(url, usuario, clave);
             if (con != null) {
-                System.out.println("se ha establecido una conexion a la base de datos n" + url);
+                System.out.println("se ha establecido una conexion a la base de datos ");
             }
         } catch (SQLException | ClassNotFoundException e) {
 
