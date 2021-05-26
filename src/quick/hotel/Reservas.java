@@ -46,7 +46,7 @@ public class Reservas extends javax.swing.JFrame {
         btnconsulta.setEnabled(false);
         btneliminar.setEnabled(false);
         btnmodificar.setEnabled(false);
-        limpiar();
+     
     }
 
     /**
@@ -191,6 +191,10 @@ public class Reservas extends javax.swing.JFrame {
         S_c_habitacion.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
 
         rSLabelFecha1.setForeground(new java.awt.Color(0, 0, 0));
+
+        J_Inicio.setDateFormatString("dd/MM/yyyy");
+
+        J_fin.setDateFormatString("dd/MM/yyyy");
 
         jButton5.setText("SALIR");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -355,18 +359,18 @@ public class Reservas extends javax.swing.JFrame {
         Integer CAN_PERSONA = (Integer) S_c_personas.getValue();
 
         int diaI = J_Inicio.getCalendar().get(Calendar.DAY_OF_MONTH);
-        int mesI = J_Inicio.getCalendar().get(Calendar.ALL_STYLES);
+        int mesI = J_Inicio.getCalendar().get(Calendar.MONTH);
         int añoI = J_Inicio.getCalendar().get(Calendar.YEAR);
         int horaI = J_Inicio.getCalendar().get(Calendar.HOUR_OF_DAY);
         int min = J_Inicio.getCalendar().get(Calendar.MINUTE);
 
         int diaF = J_fin.getCalendar().get(Calendar.DAY_OF_MONTH);
-        int mesF = J_fin.getCalendar().get(Calendar.ALL_STYLES);
+        int mesF = J_fin.getCalendar().get(Calendar.MONTH);
         int añoF = J_fin.getCalendar().get(Calendar.YEAR);
 
-        String FECHA_I_RESERVA = +añoI + "-" + mesI + "-" + diaI + " " + horaI + ":" + min;
+        String FECHA_I_RESERVA = +añoI + "-" + mesI + "-" + diaI;
         String FECHA_F_RESERVA = +añoF + "-" + mesF + "-" + diaF;
-
+        System.out.println(""+FECHA_F_RESERVA);
         NUM_RESERVA = N_Reserva.getText();
         ID_HUESPED = Combo_Huesped.getSelectedItem().toString();
 

@@ -295,8 +295,14 @@
           </Properties>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="J_Inicio">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
+          </Properties>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="J_fin">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton5">
           <Properties>
