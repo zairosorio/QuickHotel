@@ -355,7 +355,7 @@ public class Reservas extends javax.swing.JFrame {
         String sql = "";
 
         Integer CAN_HABITACION = (Integer) S_c_habitacion.getValue();
-        Integer CAN_NOCHES = (Integer) S_c_habitacion.getValue();
+        Integer CAN_NOCHES = (Integer) S_noches.getValue();
         Integer CAN_PERSONA = (Integer) S_c_personas.getValue();
 
         int diaI = J_Inicio.getCalendar().get(Calendar.DAY_OF_MONTH);
@@ -368,9 +368,9 @@ public class Reservas extends javax.swing.JFrame {
         int mesF = J_fin.getCalendar().get(Calendar.MONTH);
         int añoF = J_fin.getCalendar().get(Calendar.YEAR);
 
-        String FECHA_I_RESERVA = +añoI + "-" + mesI + "-" + diaI;
-        String FECHA_F_RESERVA = +añoF + "-" + mesF + "-" + diaF;
-        System.out.println(""+FECHA_F_RESERVA);
+        String FECHA_I_RESERVA = +añoI + "-" + mesI + "-" + diaI+" "+horaI+":"+min;
+        String FECHA_F_RESERVA = +añoF + "-" + mesF + "-" + diaF+" "+horaI+":"+min;
+        
         NUM_RESERVA = N_Reserva.getText();
         ID_HUESPED = Combo_Huesped.getSelectedItem().toString();
 

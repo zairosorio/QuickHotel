@@ -463,7 +463,7 @@ public class Registro extends javax.swing.JFrame {
         String sql = "";
 
         int dia = campo_calendario.getCalendar().get(Calendar.DAY_OF_MONTH);
-        int mes = campo_calendario.getCalendar().get(Calendar.ALL_STYLES);
+        int mes = campo_calendario.getCalendar().get(Calendar.MONTH);
         int año = campo_calendario.getCalendar().get(Calendar.YEAR);
 
         String FECHANACI = +año + "-" + mes + "-" + dia;
@@ -561,6 +561,8 @@ public class Registro extends javax.swing.JFrame {
         combociudad.removeAllItems();
         combo_IDENTIDAD.removeAllItems();
         buscar();
+        
+       
 
     }//GEN-LAST:event_btnbuscarActionPerformed
 
@@ -722,7 +724,7 @@ public class Registro extends javax.swing.JFrame {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/quick_hotel", "root", "");
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select * from  huesped where IDENTIFICACION='" + identificacion + "'  ");
-             String datefecha = "";
+           
             if (rs.next()) {
                 combo_IDENTIDAD.addItem(rs.getString(2));
                 campo_pri_nombre.setText(rs.getString(3));
@@ -750,6 +752,7 @@ public class Registro extends javax.swing.JFrame {
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (option == JOptionPane.YES_OPTION) {
                     campo_pri_nombre.requestFocus();
+                    cargar();
                 }
             }
         } catch (Exception e) {
@@ -762,7 +765,7 @@ public class Registro extends javax.swing.JFrame {
         this.campo_calendario = calendario;
     }
 
-   public static void  cargar() {
+    void  cargar() {
         try {
             Connection con = null;
 
